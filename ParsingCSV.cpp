@@ -23,15 +23,15 @@ void processData(const std::string& file){
 
         std::getline(stream, temp, ',');            //line number
         std::getline(stream, temp, ',');            //track ID
-        std::getline(stream, artistName, ',');    // ARTIST NAME
+        std::getline(stream, artistName, ',');      // ARTIST NAME
         std::getline(stream, temp, ',');            //album name
-        std::getline(stream, songName, ',');      // SONG NAME
+        std::getline(stream, songName, ',');        // SONG NAME
         std::getline(stream, temp, ',');            //popularity
         std::getline(stream, temp, ',');            //duration
         std::getline(stream, temp, ',');            //explicit
         std::getline(stream, temp, ',');            //danceability
         std::getline(stream, temp, ',');           
-        energy = std::stof(temp);                  // ENERGY as float
+        energy = std::stof(temp);                   // ENERGY as float
         std::getline(stream, temp, ',');            //key
         std::getline(stream, temp, ',');            //loudness
         std::getline(stream, temp, ',');            //mode
@@ -46,11 +46,11 @@ void processData(const std::string& file){
         std::getline(stream, temp, ',');
         valence = std::stof(temp);                  // VALENCE as float
 
-        std::getline(stream, temp, ',');          // BPM
+        std::getline(stream, temp, ',');            // BPM
         bpm = std::stof(temp);
 
-        std::getline(stream, temp, ',');        //time signature
-        std::getline(stream, temp, ',');        //genre
+        std::getline(stream, temp, ',');            //time signature
+        std::getline(stream, temp, ',');            //genre
         
         
        
@@ -58,7 +58,9 @@ void processData(const std::string& file){
         // Create MusicObject with parsed data
         MusicObject song(artistName, songName, bpm, valence, energy, instrumentalness);
 
-        std::cout << "Artist: " << song.ArtistName << ", Name: "<< song.SongName << ", Energy: "<< song.energy << ", Instrumentalness: "<< song.instrumentalness << ", Valance: "<< song.valence  << ", BPM: "<< song.bpm  << std::endl;
+        std::cout << "Artist: " << song.ArtistName << ", Name: "<< song.SongName << ", Energy: "
+        << song.energy << ", Instrumentalness: " << song.instrumentalness << ", Valance: "
+        << song.valence  << ", BPM: "<< song.bpm  << ", Hash: "<< song.filterHash << std::endl;
     }
 
 
