@@ -3,8 +3,7 @@
 #include <sstream>
 #include "ParsingCSV.h"
 
-
-void processData(const std::string& file){
+void processData(const std::string& file, int moodChoice, int tempoChoice, int instrumentalnessChoice){ //could also pass in the map/n-ary tree 
     std::ifstream inputFile(file);
 
     std::string line;
@@ -58,11 +57,17 @@ void processData(const std::string& file){
         // Create MusicObject with parsed data
         MusicObject song(artistName, songName, bpm, valence, energy, instrumentalness);
 
+        song.calculateRankScore(moodChoice, tempoChoice, instrumentalnessChoice);
+
+        //push song obj to priority queue (max heap) here
+
         std::cout << "Artist: " << song.ArtistName << ", Name: "<< song.SongName << ", Energy: "
         << song.energy << ", Instrumentalness: " << song.instrumentalness << ", Valance: "
-        << song.valence  << ", BPM: "<< song.bpm  << ", Hash: "<< song.filterHash << std::endl;
+        << song.valence  << ", BPM: "<< song.bpm  << ", Mood: "<< song.mood << ", Hash: "<< song.filterHash << ", Rank: "<< song.rankScore << std::endl;
     }
 
+
+    inputFile.close();
 
 }
 
