@@ -1,10 +1,21 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <queue>
+#include "MusicObject.h"
 #include "ParsingCSV.h"
+
+//comparator for the max-heap priority queue
+struct CompareRank {
+    bool operator()(const MusicObject& a, const MusicObject& b) {
+        return a.rankScore < b.rankScore; //Maxheap higher rank comes first
+    }
+};
 
 void processData(const std::string& file, int moodChoice, int tempoChoice, int instrumentalnessChoice){ //could also pass in the map/n-ary tree 
     std::ifstream inputFile(file);
+
+    std::priority_queue<MusicObject, std::vector<MusicObject>, CompareRank> maxHeap;
 
     std::string line;
     int lineCount = 0; //for testing
@@ -60,6 +71,7 @@ void processData(const std::string& file, int moodChoice, int tempoChoice, int i
         song.calculateRankScore(moodChoice, tempoChoice, instrumentalnessChoice);
 
         //push song obj to priority queue (max heap) here
+        maxHeap.push(song);
 
         std::cout << "Artist: " << song.ArtistName << ", Name: "<< song.SongName << ", Energy: "
         << song.energy << ", Instrumentalness: " << song.instrumentalness << ", Valance: "
@@ -69,6 +81,17 @@ void processData(const std::string& file, int moodChoice, int tempoChoice, int i
 
     inputFile.close();
 
+    //displays the top 20 ranked songs from max-heap'
+    std::cout << "\nTop 20 Songs";
+    int rank = 1;
+    while(!maxHeap.empty() && rank <=20){
+        MusicObject topSong = maxHeap.top();
+        maxHeap.pop();
+
+        std::cout << rank << ". Artist: " << topSong.ArtistName
+        << ", Song: " << topSong. SongName
+        <<", Rank: " << topSong.rankScore << std::endl;
+    }
 }
 
 
