@@ -79,8 +79,8 @@ float MusicObject::calculateTempoRank(int tempoChoice) {
 
 void MusicObject::calculateRankScore(int moodChoice, int tempoChoice, int instrumentalnessChoice) {
 
-    std::cout << "Mood Rank: " << calculateMoodRank(moodChoice) << ", Tempo Rank: " << calculateTempoRank(tempoChoice)
-              << ", Instrumentalness Rank: " << calculateInstrumentalnessRank(instrumentalnessChoice) << std::endl;
+    // std::cout << "Mood Rank: " << calculateMoodRank(moodChoice) << ", Tempo Rank: " << calculateTempoRank(tempoChoice)
+    //           << ", Instrumentalness Rank: " << calculateInstrumentalnessRank(instrumentalnessChoice) << std::endl;
 
     rankScore = calculateMoodRank(moodChoice) + calculateTempoRank(tempoChoice) +
                 calculateInstrumentalnessRank(instrumentalnessChoice);

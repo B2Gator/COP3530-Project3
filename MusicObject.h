@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
-#include <array>
+//#include <array>
+#include <vector>
 #ifndef MUSICOBJECT_H
 #define MUSICOBJECT_H
 
@@ -31,10 +32,10 @@ struct MusicObject {
    
 
    private:
-    const std::array<float, 4> idealValence = {1.0f, 0.0f, 1.0f, 0.0f}; // Happy, Sad, Chill, Angry
-    const std::array<float, 4> idealEnergy = {1.0f, 0.0f, 0.0f, 1.0f};
-	const std::array<float, 4> idealTempo = {25.0f, 75.0f, 125.0f, 175.0f}; //slow, moderate, fast, very fast
-	const std::array<float, 4> idealInstrumentalness = {0.0f, 0.35f, 0.65f, 1.0f}; //mostly vocals, moderate vocals, less vocals, little/no vocals
+    std::vector<float> idealValence = {1.0f, 0.0f, 1.0f, 0.0f}; // Happy, Sad, Chill, Angry
+    std::vector<float> idealEnergy = {1.0f, 0.0f, 0.0f, 1.0f};
+	std::vector<float> idealTempo = {25.0f, 75.0f, 125.0f, 175.0f}; //slow, moderate, fast, very fast
+	std::vector<float> idealInstrumentalness = {0.0f, 0.35f, 0.65f, 1.0f}; //mostly vocals, moderate vocals, less vocals, little/no vocals
 }; 
 
 //create another struct for the user choices (use to rank songs)

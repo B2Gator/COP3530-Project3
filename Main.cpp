@@ -41,10 +41,30 @@ int main() {
     std::cin >> input.instrumentalnessChoice;
     std::cout << std::endl;
 
+    std::string userHash = std::to_string(input.moodChoice) + std::to_string(input.tempoChoice) + std::to_string(input.instrumentalnessChoice);
+    int choice;
+
+    std::cout << "Choose storage method" << std::endl;
+    std::cout << "1 for Unordered Map or 2 for N-ary Tree: ";
+    std::cin >> choice;
+    std::cout << std::endl;
+
+    //processData(filename, input.moodChoice, input.tempoChoice, input.instrumentalnessChoice);
+
+    if (choice == 1){
+        UnorderedMapStorage mapStorage;
+        processData(filename, input.moodChoice, input.tempoChoice, input.instrumentalnessChoice, &mapStorage, nullptr, userHash);
+        mapStorage.displayTopSongs(userHash);
+    }
     
-    //could do another choice of map/tree and then pass in corresponding paramter to processData call
-    processData(filename, input.moodChoice, input.tempoChoice, input.instrumentalnessChoice);
-    
+    else if(choice == 2){
+
+        std::cout << "Implement n-ary tree" << std::endl;
+        // UnorderedMapStorage treeStorage;
+        // processData(filename, input.moodChoice, input.tempoChoice, input.instrumentalnessChoice, nullptr, &treeStorage, userHash);
+
+    }
+
     
     return 0;
 }

@@ -21,6 +21,12 @@
     <ClInclude Include="ParsingCSV.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CompareRank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UnorderedMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MusicObject.cpp">
