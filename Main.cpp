@@ -43,6 +43,7 @@ int main() {
     std::cout << std::endl;
 
 
+
     std::string userHash = std::to_string(input.moodChoice-1) + std::to_string(input.tempoChoice-1) + std::to_string(input.instrumentalnessChoice-1);
    
 
@@ -68,6 +69,12 @@ int main() {
         // processData(filename, input.moodChoice - 1, input.tempoChoice - 1, input.instrumentalnessChoice - 1, nullptr, &treeStorage, userHash);
 
     }
+
+=======
+    
+    //could do another choice of map/tree and then pass in corresponding paramter to processData call
+    DB.processData(filename, input.moodChoice - 1, input.tempoChoice - 1, input.instrumentalnessChoice - 1);
+    
 
     
     return 0;

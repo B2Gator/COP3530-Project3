@@ -5,8 +5,23 @@
 #include <queue>
 
 
+
 void MusicDB::processData(const std::string& file, int moodChoice, int tempoChoice, int instrumentalnessChoice, UnorderedMapStorage* mapStorage, UnorderedMapStorage* treeStorage, const std::string& userHash) { //could also pass in the map/n-ary tree 
     std::ifstream inputFile(file);
+
+=======
+//comparator for the max-heap priority queue
+struct CompareRank {
+    bool operator()(const MusicObject& a, const MusicObject& b) {
+        return a.rankScore < b.rankScore; //Maxheap higher rank comes first
+    }
+};
+
+void MusicDB::processData(const std::string& file, int moodChoice, int tempoChoice, int instrumentalnessChoice) { //could also pass in the map/n-ary tree 
+    std::ifstream inputFile(file);
+
+    std::priority_queue<MusicObject, std::vector<MusicObject>, CompareRank> maxHeap;
+
 
     std::string line;
     int lineCount = 0; //for testing
@@ -34,10 +49,18 @@ void MusicDB::processData(const std::string& file, int moodChoice, int tempoChoi
 
             MusicObject song(artistName, songName, trackID, bpm, valence, energy, instrumentalness);
 
+
             song.calculateRankScore(moodChoice, tempoChoice, instrumentalnessChoice);
 
             mapStorage->addSong(song);
           
+            allSongs.insert(make_tuple(song.trackID, song.SongName, song)); // inserts song into database of all songs
+            subsets[song.filterHash].insert(make_tuple(song.trackID, song.SongName, song)); // inserts into subset
+
+            if (song.filterHash == std::to_string(moodChoice) + std::to_string(tempoChoice) + std::to_string(instrumentalnessChoice)) {
+                // calculates score for ranking if it matches user input hash
+                song.calculateRankScore(moodChoice, tempoChoice, instrumentalnessChoice); 
+            }
         }
         catch (const std::exception& e) {
             std::cerr << "error parsing line" << lineCount << ": " << e.what() << std::endl;
@@ -48,6 +71,10 @@ void MusicDB::processData(const std::string& file, int moodChoice, int tempoChoi
 
     inputFile.close();
 
+
+
+    //displays the top 20 ranked songs from max-heap
+    std::cout << "\nTop 20 Songs"; // ranking functionality has not been re-implemented yet, stop-gap for debugging
 
 }
 

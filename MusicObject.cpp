@@ -95,6 +95,7 @@ int MusicObject::calculateMood() {
 
 	return mood;
 	
+
 }
 
 void MusicObject::calculateHash() {
@@ -123,8 +124,38 @@ void MusicObject::calculateHash() {
 
 
 	filterHash = std::to_string(mood) + std::to_string(bpmNum) + std::to_string(instrumentalnessNum);
+}
+
+void MusicObject::calculateHash() {
+    // all hash and mood values start at 0 to match with array/vector indices, otherwise you get subscript errors
+	int bpmNum = 0;
+        if (bpm < 50) {
+            bpmNum = 0;  
+        } else if (bpm < 100) {
+            bpmNum = 1;
+        } else if (bpm < 150) {
+            bpmNum = 2;  
+        } else {
+            bpmNum = 3;  
+        }
+
+	int instrumentalnessNum = 0;
+        if (instrumentalness < 0.2f) {
+            instrumentalnessNum = 0;  // Mostly vocal
+        } else if (instrumentalness < 0.5f) {
+            instrumentalnessNum = 1;  // Moderate vocals
+        } else if (instrumentalness < 0.8f) {
+            instrumentalnessNum = 2;  // Less vocals
+        } else {
+            instrumentalnessNum = 3;  // Mostly instrumental
+        }
+
+
+
+	filterHash = std::to_string(mood) + std::to_string(bpmNum) + std::to_string(instrumentalnessNum);
     
 }
+
 
 
 // each result is basically 1 - (actual value - ideal value)/ideal value
@@ -149,13 +180,21 @@ float MusicObject::calculateTempoRank(int tempoChoice) {
 
 void MusicObject::calculateRankScore(int moodChoice, int tempoChoice, int instrumentalnessChoice) {
 
+
     // std::cout << "Mood Rank: " << calculateMoodRank(moodChoice) << ", Tempo Rank: " << calculateTempoRank(tempoChoice)
     //     << ", Instrumentalness Rank: " << calculateInstrumentalnessRank(instrumentalnessChoice);
+
+    std::cout << "Mood Rank: " << calculateMoodRank(moodChoice) << ", Tempo Rank: " << calculateTempoRank(tempoChoice)
+        << ", Instrumentalness Rank: " << calculateInstrumentalnessRank(instrumentalnessChoice);
+
 
     // current idea for calculating ranks: default weight is 1/(number of factors, 3 in this case)
     rankScore = calculateMoodRank(moodChoice)/3 + calculateTempoRank(tempoChoice)/3 +
                 calculateInstrumentalnessRank(instrumentalnessChoice)/3;
 
+
     //std::cout << ", Rank Score: " << rankScore << std::endl;
+
+    std::cout << ", Rank Score: " << rankScore << std::endl;
 	
 }
