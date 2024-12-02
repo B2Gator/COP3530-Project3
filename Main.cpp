@@ -66,15 +66,10 @@ int main() {
 
         std::cout << "Implement n-ary tree" << std::endl;
         // UnorderedMapStorage treeStorage;
-        // processData(filename, input.moodChoice - 1, input.tempoChoice - 1, input.instrumentalnessChoice - 1, nullptr, &treeStorage, userHash);
+        // Db.processData(filename, input.moodChoice - 1, input.tempoChoice - 1, input.instrumentalnessChoice - 1, nullptr, &treeStorage, userHash);
 
     }
 
-=======
-    
-    //could do another choice of map/tree and then pass in corresponding paramter to processData call
-    DB.processData(filename, input.moodChoice - 1, input.tempoChoice - 1, input.instrumentalnessChoice - 1);
-    
 
     
     return 0;

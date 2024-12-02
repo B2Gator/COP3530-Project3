@@ -16,10 +16,4 @@ private:
 	std::vector<std::string> parseLine(const std::string& line);
 };
 #endif
-	std::set<std::tuple<std::string, std::string, MusicObject>> allSongs;
-	std::unordered_map<std::string, std::set<std::tuple<std::string, std::string, MusicObject>>> subsets;
-	void processData(const std::string& file, int moodChoice, int tempoChoice, int instrumentalnessChoice);
-private:
-	std::vector<std::string> parseLine(const std::string& line);
-};
-#endif
+	
