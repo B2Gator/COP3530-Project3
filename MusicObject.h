@@ -1,5 +1,8 @@
 #pragma once
 #include <iostream>
+#include <array>
+#include <iostream>
+#include <string>
 #ifndef MUSICOBJECT_H
 #define MUSICOBJECT_H
 
@@ -7,43 +10,51 @@
 struct MusicObject {
 	std::string ArtistName;
 	std::string SongName;
+	std::string trackID;
 	float bpm = 0.0f;
-	float Valence = 0.0f;
-	float loudness = 0.0f;
+	float valence = 0.0f;
 	float energy = 0.0f;
-	std::string filterHash;
 	float instrumentalness = 0.0f;
-	float speechiness = 0.0f;
-	float acousticness = 0.0f; 
-	std::string songGenre;
-	int SongMood(int valence, int energy); // new idea, we're gonna have it return a regular int from 0 to 3 based on the moods
 	
-	
+	int mood;
+	std::string filterHash;
 
-    // actually i'm not sure if i should make this pre-process the hash values
+	float rankScore = 0.0f;
 
-    //i think we have to wait for user input
+	int calculateMood();
+	void calculateHash();
 
-	// yeah, but part of the point was to make the program filter out a set to draw the top 20 results from
-	// actually yk we'll work on that later
+	float calculateMoodRank(int moodChoice);
+	float calculateTempoRank(int tempoChoice);
+	float calculateInstrumentalnessRank(int instrumentalnessChoice);
+	void calculateRankScore(int moodChoice, int tempoChoice, int instrumentalnessChoice);
 
+	MusicObject(const std::string& artist, const std::string& song, const std::string& trackID, float bpm, float valence,
+                float energy, float instrumentalness);
+	MusicObject(const MusicObject& other);
+	MusicObject& operator=(const MusicObject& other);
+	MusicObject(MusicObject&& other) noexcept;
+	MusicObject& operator=(MusicObject&& other) noexcept;
+	bool operator<(const MusicObject& other) const {
+		return trackID < other.trackID;
+	}
+   
 
-
-	// we'd load in the database before any user input, since we have to load it in anyway
-
-    //how do we actually load the data though. I was looking at an OpenXLSX download thing but idk 
-	// we're loading a csv file, which is pretty straightforward. i think i still have leftover parsing code we can cobble in
-    //ok cool
-
-	// i hate to cut things short right now but i really have to go. i'll send both the source files over
-
-	// next two things to work on are probably the main database and then the csv parser
-	// i'll get the code for the parser over ASAP and we'll figure out integration from there
-
-    //thank you!
-    //is there a way we can keep this folder somewhere we can all look at it? 
-	// i could probably set up a github repo, though i haven't done that in a hot minute
-    // github?
-    // i think you can publish it to a new repo directly from here if you go over to the source control on the left
+   private:
+    const std::array<float, 4> idealValence = {1.0f, 0.0f, 1.0f, 0.0f}; // Happy, Sad, Chill, Angry
+    const std::array<float, 4> idealEnergy = {1.0f, 0.0f, 0.0f, 1.0f};
+	const std::array<float, 4> idealTempo = {25.0f, 75.0f, 125.0f, 175.0f}; //slow, moderate, fast, very fast
+	const std::array<float, 4> idealInstrumentalness = {0.0f, 0.35f, 0.65f, 1.0f}; //mostly vocals, moderate vocals, less vocals, little/no vocals
 }; 
+
+//create another struct for the user choices (use to rank songs)
+struct UserChoice {
+	int moodChoice;
+	int tempoChoice;
+	int instrumentalnessChoice;
+
+};
+
+
+
 #endif

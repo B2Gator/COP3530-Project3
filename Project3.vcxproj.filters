@@ -18,10 +18,35 @@
     <ClInclude Include="MusicObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ParsingCSV.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicDatabase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MusicObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParsingCSV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicDatabase.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
+  <!-- <ItemGroup>
+    <ClInclude Include="MusicObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MusicObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup> -->
 </Project>
