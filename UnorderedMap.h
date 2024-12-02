@@ -16,24 +16,32 @@ public:
             collection.trackIDs.insert(song.trackID);
             collection.queue.push(song);
         }
+
     }
 
 void displayTopSongs(const std::string& hashInput) {
-    std::cout << "Generated userHash: " << hashInput << std::endl;
+
+
     auto it = songMap.find(hashInput);
     if (it != songMap.end()) {
-        auto& [trackIDs, queue] = it->second; 
-        auto tempQueue = queue;  // Make a copy to iterate and preserve the original
+        auto& [trackIDs, queue] = it->second;
 
         int rank = 1;
-        while (!tempQueue.empty() && rank <= 20) {
-            const MusicObject& topSong = tempQueue.top();
+        int count = 0;
+
+        //pop top 20 songs & display
+        while (!queue.empty() && count < 20) {
+            const MusicObject& topSong = queue.top();
             std::cout << rank << ". Artist: " << topSong.ArtistName
                       << ", Name: " << topSong.SongName
-                      << " | Rank: " << topSong.rankScore<< " | Hash: " << topSong.filterHash << "\n";
-            tempQueue.pop();
+                      << " | Rank: " << topSong.rankScore 
+                      << " | TrackID: " << topSong.trackID 
+                      << " | Hash: " << topSong.filterHash << "\n";
+            queue.pop();
             rank++;
+            count++;
         }
+    
     } else {
         std::cout << "No songs found with hash: " << hashInput << std::endl;
     }

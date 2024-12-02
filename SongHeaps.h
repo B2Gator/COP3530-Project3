@@ -1,5 +1,5 @@
 #pragma once
-#include <set>
+#include <unordered_set>
 #include <queue>
 #include "MusicObject.h"
 
@@ -12,6 +12,6 @@ struct CompareRank {
 };
 
 struct SongCollection {
-    std::set<std::string> trackIDs;
+    std::unordered_set<std::string> trackIDs;
     std::priority_queue<MusicObject, std::vector<MusicObject>, CompareRank> queue;
 };

@@ -5,7 +5,7 @@
 #include <sstream>
 #include <queue>
 
-void MusicDB::processData(const std::string& file, int moodChoice, int tempoChoice, int instrumentalnessChoice, UnorderedMapStorage* mapStorage, UnorderedMapStorage* treeStorage, const std::string& userHash) { //could also pass in the map/n-ary tree 
+void MusicDB::processData(const std::string& file, int moodChoice, int tempoChoice, int instrumentalnessChoice, UnorderedMapStorage* mapStorage, UnorderedMapStorage* treeStorage, const std::string& userHash) {
     std::ifstream inputFile(file);
     std::string line;
     int lineCount = 0; //for testing
