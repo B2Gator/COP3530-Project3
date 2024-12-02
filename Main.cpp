@@ -69,7 +69,7 @@ int main() {
 
 
 
-        std::string userHash = std::to_string(input.moodChoice-1) + std::to_string(input.tempoChoice-1) + std::to_string(input.instrumentalnessChoice-1);
+        std::string hashInput = std::to_string(input.moodChoice-1) + std::to_string(input.tempoChoice-1) + std::to_string(input.instrumentalnessChoice-1);
     
 
         int choice;
@@ -82,16 +82,15 @@ int main() {
 
         if (choice == 1){
             UnorderedMapStorage mapStorage;
-            DB.processData(filename, input.moodChoice - 1, input.tempoChoice - 1, input.instrumentalnessChoice - 1, &mapStorage, nullptr, userHash);
-            mapStorage.displayTopSongs(userHash);
+            DB.processData(filename, input.moodChoice - 1, input.tempoChoice - 1, input.instrumentalnessChoice - 1, &mapStorage, nullptr, hashInput);
+            mapStorage.displayTopSongs(hashInput);
         }
         
         else {
 
-            std::cout << "Implement n-ary tree" << std::endl;
-            // UnorderedMapStorage treeStorage;
-            // Db.processData(filename, input.moodChoice - 1, input.tempoChoice - 1, input.instrumentalnessChoice - 1, nullptr, &treeStorage, userHash);
-
+            NaryTreeStorage treeStorage;
+            DB.processData(filename, input.moodChoice - 1, input.tempoChoice - 1, input.instrumentalnessChoice - 1, nullptr, &treeStorage, hashInput);
+            treeStorage.displayTopSongs(hashInput);
         }
 
         std::cout << std::endl;

@@ -5,7 +5,7 @@
 #include <sstream>
 #include <queue>
 
-void MusicDB::processData(const std::string& file, int moodChoice, int tempoChoice, int instrumentalnessChoice, UnorderedMapStorage* mapStorage, UnorderedMapStorage* treeStorage, const std::string& userHash) {
+void MusicDB::processData(const std::string& file, int moodChoice, int tempoChoice, int instrumentalnessChoice, UnorderedMapStorage* mapStorage, NaryTreeStorage* treeStorage, const std::string& hashInput) {
     std::ifstream inputFile(file);
     std::string line;
     int lineCount = 0; //for testing
@@ -29,7 +29,14 @@ void MusicDB::processData(const std::string& file, int moodChoice, int tempoChoi
             
             MusicObject song(artistName, songName, trackID, bpm, valence, energy, instrumentalness);
             song.calculateRankScore(moodChoice, tempoChoice, instrumentalnessChoice);
-            mapStorage->addSong(song);
+            
+            
+            if (mapStorage) {
+                mapStorage->addSong(song);
+            } 
+            else if (treeStorage) { 
+                treeStorage->addSong(song, hashInput);
+            }
           
         }
         catch (const std::exception& e) {
