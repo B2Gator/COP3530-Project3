@@ -100,7 +100,7 @@ void NaryTreeStorage::displayTopSongs(const std::string& hashInput) {
             const MusicObject& song = node->songCollection.queue.top();
              if (song.filterHash == hashInput) {
                 std::cout << rank << ". Artist: " << song.ArtistName
-                          << ", Name: " << song.SongName
+                          << " | Name: " << song.SongName
                           << " | Rank: " << song.rankScore
                           << " | TrackID: " << song.trackID
                           << " | Hash: " << song.filterHash << "\n";

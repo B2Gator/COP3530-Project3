@@ -21,7 +21,6 @@ public:
 
 void displayTopSongs(const std::string& hashInput) {
 
-
     auto it = songMap.find(hashInput);
     if (it != songMap.end()) {
         auto& [trackIDs, queue] = it->second;
@@ -33,7 +32,7 @@ void displayTopSongs(const std::string& hashInput) {
         while (!queue.empty() && count < 20) {
             const MusicObject& topSong = queue.top();
             std::cout << rank << ". Artist: " << topSong.ArtistName
-                      << ", Name: " << topSong.SongName
+                      << " | Name: " << topSong.SongName
                       << " | Rank: " << topSong.rankScore 
                       << " | TrackID: " << topSong.trackID 
                       << " | Hash: " << topSong.filterHash << "\n";

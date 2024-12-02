@@ -1,6 +1,8 @@
 #include <iostream>
+#include <chrono>
 #include <limits>
 #include "MusicDatabase.h"
+
 
 int validatedInput(int min, int max) {
     int choice;
@@ -79,11 +81,13 @@ int main() {
         std::cin >> choice;
         std::cout << std::endl;
 
+        auto t1 = std::chrono::high_resolution_clock::now();
 
         if (choice == 1){
             UnorderedMapStorage mapStorage;
             DB.processData(filename, input.moodChoice - 1, input.tempoChoice - 1, input.instrumentalnessChoice - 1, &mapStorage, nullptr, hashInput);
             mapStorage.displayTopSongs(hashInput);
+            std::cout << std::endl;
         }
         
         else {
@@ -91,7 +95,13 @@ int main() {
             NaryTreeStorage treeStorage;
             DB.processData(filename, input.moodChoice - 1, input.tempoChoice - 1, input.instrumentalnessChoice - 1, nullptr, &treeStorage, hashInput);
             treeStorage.displayTopSongs(hashInput);
+            std::cout << std::endl;
         }
+
+        auto t2 = std::chrono::high_resolution_clock::now();
+
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1);  
+        std::cout << "Time taken: " << duration.count() / 1000000.0 << " seconds" << std::endl; //output time in seconds
 
         std::cout << std::endl;
         std::cout << "Enter 1 to run the program again or 0 to exit. ";
