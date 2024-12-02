@@ -1,3 +1,5 @@
+// DEPRECATED, KEEPING FOR REFERENCE, USE MUSICDATABASE.CPP
+
 
 #include <iostream>
 #include <fstream>
@@ -6,15 +8,17 @@
 #include "MusicObject.h"
 #include "ParsingCSV.h"
 
+//comparator for the max-heap priority queue
+struct CompareRank {
+    bool operator()(const MusicObject& a, const MusicObject& b) {
+        return a.rankScore < b.rankScore; //Maxheap higher rank comes first
+    }
+};
 
-
-//void processData(const std::string& file, int moodChoice, int tempoChoice, int instrumentalnessChoice){ //could also pass in the map/n-ary tree 
-void processData(const std::string& file, int moodChoice, int tempoChoice, int instrumentalnessChoice, 
-     UnorderedMapStorage* mapStorage, UnorderedMapStorage* treeStorage, const std::string& userHash){
-        
+void processData(const std::string& file, int moodChoice, int tempoChoice, int instrumentalnessChoice){ //could also pass in the map/n-ary tree 
     std::ifstream inputFile(file);
 
-    //std::priority_queue<MusicObject, std::vector<MusicObject>, CompareRank> maxHeap;
+    std::priority_queue<MusicObject, std::vector<MusicObject>, CompareRank> maxHeap;
 
     std::string line;
     int lineCount = 0; //for testing
@@ -22,16 +26,17 @@ void processData(const std::string& file, int moodChoice, int tempoChoice, int i
     std::getline(inputFile, line);  // Skip header
 
     // Read and process each line of the CSV
-    while (std::getline(inputFile, line) && lineCount < 20) {
+    while (std::getline(inputFile, line) && lineCount<20) {
         lineCount++;
 
-        std::string artistName, songName, temp;
+        std::string artistName, songName, temp, trackID;
         float bpm, valence, energy, instrumentalness;
 
         std::istringstream stream(line);
 
         std::getline(stream, temp, ',');            //line number
         std::getline(stream, temp, ',');            //track ID
+        trackID = std::stof(temp);
         std::getline(stream, artistName, ',');      // ARTIST NAME
         std::getline(stream, temp, ',');            //album name
         std::getline(stream, songName, ',');        // SONG NAME
@@ -62,36 +67,39 @@ void processData(const std::string& file, int moodChoice, int tempoChoice, int i
         std::getline(stream, temp, ',');            //genre
         
         
+       
 
         // Create MusicObject with parsed data
-        MusicObject song(artistName, songName, bpm, valence, energy, instrumentalness);
+        MusicObject song(artistName, songName, trackID, bpm, valence, energy, instrumentalness);
 
-        song.calculateRankScore(moodChoice, tempoChoice, instrumentalnessChoice);
+        std::cout << "Artist: " << song.ArtistName << ", Name: " << song.SongName << ", Energy: "
+            << song.energy << ", Instrumentalness: " << song.instrumentalness << ", Valance: "
+            << song.valence << ", BPM: " << song.bpm << ", Mood: " << song.mood << ", Hash: " << song.filterHash;
 
-        mapStorage->addSong(song);
+        // only calculate rank if the song matches user input parameters
+        if (song.filterHash == std::to_string(moodChoice) + std::to_string(tempoChoice) + std::to_string(instrumentalnessChoice)) {
+            song.calculateRankScore(moodChoice, tempoChoice, instrumentalnessChoice);
 
-        //maxHeap.push(song);
+            //push song obj to priority queue (max heap) here
+            maxHeap.push(song);
+            std::cout << ", Rank: " << song.rankScore;
+        }
+        std::cout << std::endl;
 
-        // std::cout << "Artist: " << song.ArtistName << ", Name: "<< song.SongName << ", Energy: "
-        // << song.energy << ", Instrumentalness: " << song.instrumentalness << ", Valance: "
-        // << song.valence  << ", BPM: "<< song.bpm  << ", Mood: "<< song.mood << ", Hash: "<< song.filterHash << ", Rank: "<< song.rankScore << std::endl;
     }
 
 
     inputFile.close();
 
     //displays the top 20 ranked songs from max-heap'
-    // std::cout << "\nTop 20 Songs";
-    // int rank = 1;
-    // while(!maxHeap.empty() && rank <=20){
-    //     MusicObject topSong = maxHeap.top();
-    //     maxHeap.pop();
+    std::cout << "\nTop 20 Songs";
+    int rank = 1;
+    while(!maxHeap.empty() && rank <=20){
+        MusicObject topSong = maxHeap.top();
+        maxHeap.pop();
 
-    //     std::cout << rank << ". Artist: " << topSong.ArtistName
-    //     << ", Song: " << topSong. SongName
-    //     <<", Rank: " << topSong.rankScore << std::endl;
-    // }
+        std::cout << rank << ". Artist: " << topSong.ArtistName
+        << ", Song: " << topSong. SongName
+        <<", Rank: " << topSong.rankScore << std::endl;
+    }
 }
-
-
-

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -14,17 +14,14 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
-    <ItemGroup>
+  <ItemGroup>
     <ClInclude Include="MusicObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ParsingCSV.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CompareRank.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UnorderedMap.h">
+    <ClInclude Include="MusicDatabase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -32,11 +29,14 @@
     <ClCompile Include="MusicObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="ParsingCSV.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="MusicDatabase.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <!-- <ItemGroup>

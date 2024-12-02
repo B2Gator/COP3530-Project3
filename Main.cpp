@@ -1,10 +1,11 @@
 #include <iostream>
-#include "ParsingCSV.h"
+#include "MusicDatabase.h"
 
 
 int main() {
 
     std::string filename = "dataset.csv";
+    MusicDB DB;
 
     UserChoice input;
 
@@ -41,7 +42,10 @@ int main() {
     std::cin >> input.instrumentalnessChoice;
     std::cout << std::endl;
 
-    std::string userHash = std::to_string(input.moodChoice) + std::to_string(input.tempoChoice) + std::to_string(input.instrumentalnessChoice);
+
+    std::string userHash = std::to_string(input.moodChoice-1) + std::to_string(input.tempoChoice-1) + std::to_string(input.instrumentalnessChoice-1);
+   
+
     int choice;
 
     std::cout << "Choose storage method" << std::endl;
@@ -53,7 +57,7 @@ int main() {
 
     if (choice == 1){
         UnorderedMapStorage mapStorage;
-        processData(filename, input.moodChoice, input.tempoChoice, input.instrumentalnessChoice, &mapStorage, nullptr, userHash);
+        DB.processData(filename, input.moodChoice - 1, input.tempoChoice - 1, input.instrumentalnessChoice - 1, &mapStorage, nullptr, userHash);
         mapStorage.displayTopSongs(userHash);
     }
     
@@ -61,7 +65,7 @@ int main() {
 
         std::cout << "Implement n-ary tree" << std::endl;
         // UnorderedMapStorage treeStorage;
-        // processData(filename, input.moodChoice, input.tempoChoice, input.instrumentalnessChoice, nullptr, &treeStorage, userHash);
+        // processData(filename, input.moodChoice - 1, input.tempoChoice - 1, input.instrumentalnessChoice - 1, nullptr, &treeStorage, userHash);
 
     }
 
