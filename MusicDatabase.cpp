@@ -4,6 +4,12 @@
 #include <sstream>
 #include <queue>
 
+
+
+void MusicDB::processData(const std::string& file, int moodChoice, int tempoChoice, int instrumentalnessChoice, UnorderedMapStorage* mapStorage, UnorderedMapStorage* treeStorage, const std::string& userHash) { //could also pass in the map/n-ary tree 
+    std::ifstream inputFile(file);
+
+=======
 //comparator for the max-heap priority queue
 struct CompareRank {
     bool operator()(const MusicObject& a, const MusicObject& b) {
@@ -15,6 +21,7 @@ void MusicDB::processData(const std::string& file, int moodChoice, int tempoChoi
     std::ifstream inputFile(file);
 
     std::priority_queue<MusicObject, std::vector<MusicObject>, CompareRank> maxHeap;
+
 
     std::string line;
     int lineCount = 0; //for testing
@@ -41,6 +48,12 @@ void MusicDB::processData(const std::string& file, int moodChoice, int tempoChoi
             float bpm = std::stof(fields[18]);
 
             MusicObject song(artistName, songName, trackID, bpm, valence, energy, instrumentalness);
+
+
+            song.calculateRankScore(moodChoice, tempoChoice, instrumentalnessChoice);
+
+            mapStorage->addSong(song);
+          
             allSongs.insert(make_tuple(song.trackID, song.SongName, song)); // inserts song into database of all songs
             subsets[song.filterHash].insert(make_tuple(song.trackID, song.SongName, song)); // inserts into subset
 
@@ -58,8 +71,11 @@ void MusicDB::processData(const std::string& file, int moodChoice, int tempoChoi
 
     inputFile.close();
 
+
+
     //displays the top 20 ranked songs from max-heap
     std::cout << "\nTop 20 Songs"; // ranking functionality has not been re-implemented yet, stop-gap for debugging
+
 }
 
 // parses the current CSV line, handles situations with commas and quotation marks
@@ -114,6 +130,3 @@ std::vector<std::string> MusicDB::parseLine(const std::string& line) {
 
     return fields;
 }
-
-
-

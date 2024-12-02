@@ -103,6 +103,3 @@ void processData(const std::string& file, int moodChoice, int tempoChoice, int i
         <<", Rank: " << topSong.rankScore << std::endl;
     }
 }
-
-
-
