@@ -73,7 +73,7 @@ void NaryTreeStorage::addSong(const MusicObject& song, const std::string& hashIn
 
 }
 
-void NaryTreeStorage::displayTopSongs(const std::string& hashInput) {
+void NaryTreeStorage::displayTopSongs(const std::string& hashInput, bool infoResolution) {
    
     NaryTreeNode* node = root; //starting node
     
@@ -103,15 +103,18 @@ void NaryTreeStorage::displayTopSongs(const std::string& hashInput) {
         while (!node->songCollection.queue.empty() && count < 20) {
             const MusicObject& song = node->songCollection.queue.top();
              if (song.filterHash == hashInput) {
-                 std::cout << rank << ". Song Name: " << song.SongName
-                     << " | Artist: " << song.ArtistName
-                     << " | BPM: " << song.bpm
-                     << " | Mood: " << moods[song.mood] << " (" << song.mood << ")"
-                     << " | Valence: " << song.valence
-                     << " | Instrumentalness: " << song.instrumentalness
-                     << " | Energy: " << song.energy
-                     << " | Hash: " << std::stoi(song.filterHash) + 111
-                     << " | Rank Score: " << song.rankScore << "\n";
+                 std::cout << rank << ". Song Name: " << std::setw(32) << std::left << song.SongName
+                     << " | Artist: " << std::setw(24) << std::left << song.ArtistName
+                     << " | Genre: " << std::setw(16) << std::left << song.genre;
+                 if (infoResolution) {
+                     std::cout << " | BPM: " << std::setw(8) << std::left << song.bpm
+                         << " | Mood: " << std::setw(moods[song.mood].size()) << std::left << moods[song.mood] << " (" << song.mood << ")"
+                         << " | Valence: " << std::setw(6) << std::left << song.valence
+                         << " | Instrumentalness: " << std::setw(4) << std::left << song.instrumentalness
+                         << " | Energy: " << std::setw(4) << std::left << song.energy
+                         << " | Rank Score: " << std::setw(8) << std::left << song.rankScore;
+                 }
+                 std::cout << "\n";
                 rank++;
                 count++;
             }

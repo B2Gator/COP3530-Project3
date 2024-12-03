@@ -81,12 +81,23 @@ int main() {
         std::cin >> choice;
         std::cout << std::endl;
 
+        bool infoResolution = false;
+        char infoInput;
+
+        std::cout << "Would you like to see additional info about your songs? (BPM, valence, energy, instrumentalness rank score)\n"
+            << "Press 'y' or 'Y' for yes, anything else for no." << std::endl;
+        std::cin >> infoInput;
+        if (infoInput == 'y' || infoInput == 'Y') {
+            infoResolution = true;
+        }
+        else infoResolution = false;
+
         auto t1 = std::chrono::high_resolution_clock::now();
 
         if (choice == 1){
             UnorderedMapStorage mapStorage;
             DB.processData(filename, input.moodChoice - 1, input.tempoChoice - 1, input.instrumentalnessChoice - 1, &mapStorage, nullptr, hashInput);
-            mapStorage.displayTopSongs(hashInput);
+            mapStorage.displayTopSongs(hashInput, infoResolution);
             std::cout << std::endl;
         }
         
@@ -94,7 +105,7 @@ int main() {
 
             NaryTreeStorage treeStorage;
             DB.processData(filename, input.moodChoice - 1, input.tempoChoice - 1, input.instrumentalnessChoice - 1, nullptr, &treeStorage, hashInput);
-            treeStorage.displayTopSongs(hashInput);
+            treeStorage.displayTopSongs(hashInput, infoResolution);
             std::cout << std::endl;
         }
 

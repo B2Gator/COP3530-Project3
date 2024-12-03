@@ -21,7 +21,7 @@ class NaryTreeStorage {
         ~NaryTreeStorage();
 
         void addSong(const MusicObject& song, const std::string& hashInput);
-        void displayTopSongs(const std::string& hashInput);
+        void displayTopSongs(const std::string& hashInput, bool infoResolution);
         
 };
 

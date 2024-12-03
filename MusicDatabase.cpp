@@ -26,8 +26,9 @@ void MusicDB::processData(const std::string& file, int moodChoice, int tempoChoi
             float instrumentalness = std::stof(fields[15]);
             float valence = std::stof(fields[17]);
             float bpm = std::stof(fields[18]);
+            std::string genre = fields[20];
             
-            MusicObject song(artistName, songName, trackID, bpm, valence, energy, instrumentalness);
+            MusicObject song(artistName, songName, trackID, genre, bpm, valence, energy, instrumentalness);
             song.calculateRankScore(moodChoice, tempoChoice, instrumentalnessChoice);
             
             

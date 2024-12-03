@@ -141,13 +141,15 @@
   <ItemGroup>
     <ClInclude Include="MusicDatabase.h" />
     <ClInclude Include="MusicObject.h" />
-    <ClInclude Include="ParsingCSV.h" />
+    <ClInclude Include="SongHeaps.h" />
+    <ClInclude Include="Tree.h" />
+    <ClInclude Include="UnorderedMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MusicDatabase.cpp" />
     <ClCompile Include="MusicObject.cpp" />
-    <ClCompile Include="ParsingCSV.cpp" />
+    <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,9 +1,9 @@
 #include "MusicObject.h"
 
 //constructor
-MusicObject::MusicObject(const std::string& artist, const std::string& song, const std::string& trackID, 
+MusicObject::MusicObject(const std::string& artist, const std::string& song, const std::string& trackID, const std::string& genre,
                          float bpm, float valence, float energy, float instrumentalness)
-    : ArtistName(artist), SongName(song), bpm(bpm), trackID(trackID), valence(valence), 
+    : ArtistName(artist), SongName(song), bpm(bpm), trackID(trackID), genre(genre), valence(valence), 
       energy(energy), instrumentalness(instrumentalness) {
    
     calculateMood();
@@ -22,6 +22,7 @@ MusicObject::MusicObject(const MusicObject& other)
     filterHash(other.filterHash),
     rankScore(other.rankScore),
     mood(other.mood),
+    genre(other.genre),
     trackID(other.trackID) {}
 
 //copy assignment operator
@@ -37,6 +38,7 @@ MusicObject& MusicObject::operator=(const MusicObject& other) {
         filterHash = other.filterHash;
         rankScore = other.rankScore;
         mood = other.mood;
+        genre = other.genre;
         trackID = other.trackID;
     }
     return *this;
@@ -55,6 +57,7 @@ MusicObject::MusicObject(MusicObject&& other) noexcept
     filterHash(std::move(other.filterHash)),
     rankScore(std::move(other.rankScore)),
     mood(std::move(other.mood)),
+    genre(std::move(other.genre)),
     trackID(std::move(other.trackID)) {}
 
 //move assignment operator
@@ -70,6 +73,7 @@ MusicObject& MusicObject::operator=(MusicObject&& other) noexcept {
         filterHash = std::move(other.filterHash);
         rankScore = std::move(other.rankScore);
         mood = std::move(other.mood);
+        genre = std::move(other.genre);
         trackID = std::move(other.trackID);
     }
     return *this;
