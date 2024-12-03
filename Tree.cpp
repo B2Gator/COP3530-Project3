@@ -91,6 +91,7 @@ void NaryTreeStorage::displayTopSongs(const std::string& hashInput, bool infoRes
         // Move to the child node
         node = node->children[index];
     }
+    bool foundMatch = false;
 
     // check if node exists
     if (!node->songCollection.queue.empty()) {
@@ -103,6 +104,7 @@ void NaryTreeStorage::displayTopSongs(const std::string& hashInput, bool infoRes
         while (!node->songCollection.queue.empty() && count < 20) {
             const MusicObject& song = node->songCollection.queue.top();
              if (song.filterHash == hashInput) {
+                 foundMatch = true;
                  std::cout << rank << ". Song Name: " << std::setw(32) << std::left << song.SongName
                      << " | Artist: " << std::setw(24) << std::left << song.ArtistName
                      << " | Genre: " << std::setw(16) << std::left << song.genre;
@@ -122,7 +124,7 @@ void NaryTreeStorage::displayTopSongs(const std::string& hashInput, bool infoRes
         }
     } 
         
-    else {
+    else if (!foundMatch){
         std::cout << "No songs found with hash: " << hashInput << std::endl;
     }
 }
