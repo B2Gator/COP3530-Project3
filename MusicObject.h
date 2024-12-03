@@ -43,8 +43,8 @@ struct MusicObject {
    private:
     const std::array<float, 4> idealValence = {1.0f, 0.0f, 1.0f, 0.0f}; // Happy, Sad, Chill, Angry
     const std::array<float, 4> idealEnergy = {1.0f, 0.0f, 0.0f, 1.0f};
-	const std::array<float, 4> idealTempo = {25.0f, 75.0f, 125.0f, 175.0f}; //slow, moderate, fast, very fast
-	const std::array<float, 4> idealInstrumentalness = {0.0f, 0.35f, 0.65f, 1.0f}; //mostly vocals, moderate vocals, less vocals, little/no vocals
+	const std::array<float, 4> idealTempo = {175.0f, 125.0f, 75.0f, 25.0f}; // very fast, fast, moderate, slow
+	const std::array<float, 4> idealInstrumentalness = {0.0f, 0.35f, 0.65f, 1.0f}; // mostly vocals, moderate vocals, less vocals, little/no vocals
 }; 
 
 //create another struct for the user choices (use to rank songs)
