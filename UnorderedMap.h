@@ -55,7 +55,7 @@ void displayTopSongs(const std::string& hashInput, bool infoResolution) {
         }
     
     } else {
-        std::cout << "No songs found with hash: " << hashInput << std::endl;
+        std::cout << "No songs found with hash: " << std::stoi(hashInput) + 111 << std::endl;
     }
 }
 

@@ -93,9 +93,10 @@ void NaryTreeStorage::displayTopSongs(const std::string& hashInput, bool infoRes
     }
     bool foundMatch = false;
 
+    bool foundMatch = false;
+
     // check if node exists
     if (!node->songCollection.queue.empty()) {
-        std::cout << "Top songs for hash: " << hashInput << "\n";
 
         int rank = 1;
         int count = 0;

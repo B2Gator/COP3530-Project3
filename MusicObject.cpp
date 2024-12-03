@@ -85,15 +85,15 @@ int MusicObject::calculateMood() {
     
 	if (valence >= 0.5) { // valence is greater than half, either happy or focused
 		if (energy < 0.5) {
-			mood = 3;
+			mood = 3; //focused
 		}
 		else // energy is > 0.5
-			mood = 0;
+			mood = 0; //happy
 	}
 	else { // valence is less than half, either sad or angry     
 		if (energy < 0.5)
 			mood = 1; // sad
-		else;
+		else
 			mood = 2; // angry
 	}
 
@@ -106,13 +106,13 @@ void MusicObject::calculateHash() {
     // all hash and mood values start at 0 to match with array/vector indices, otherwise you get subscript errors
 	int bpmNum = 0;
         if (bpm < 150 && bpm >= 100) {
-            bpmNum = 1;  
+            bpmNum = 1;   //fast
         } else if (bpm < 100 && bpm >= 50) {
-            bpmNum = 2;
+            bpmNum = 2;   //medium
         } else if (bpm < 50) {
-            bpmNum = 3;  
+            bpmNum = 3;  //slow
         } else {
-            bpmNum = 0;  
+            bpmNum = 0;  //very fast
         }
 
 	int instrumentalnessNum = 0;
