@@ -4,7 +4,7 @@ Song Generator is a program that generates a list of Top 20 songs for the user b
 
 
 ```bash
-g++ Main.cpp MusicObject.cpp ParsingCSV.cpp MusicDatabase.cpp -o Main
+g++ Main.cpp MusicObject.cpp MusicDatabase.cpp Tree.cpp -o Main
 ./Main
 ```
 
