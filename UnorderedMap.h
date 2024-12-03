@@ -10,7 +10,7 @@ public:
     std::unordered_map<std::string, SongCollection> songMap;
 
     void addSong(const MusicObject& song) {
-        
+    
        std::pair<std::string, std::string> TitleArtist = std::make_pair(song.SongName, song.ArtistName);
        auto& collection = songMap[song.filterHash];
         if (collection.trackIDs.find(song.trackID) == collection.trackIDs.end() &&
@@ -54,5 +54,7 @@ void displayTopSongs(const std::string& hashInput) {
         std::cout << "No songs found with hash: " << hashInput << std::endl;
     }
 }
+
+
 
 }; 
