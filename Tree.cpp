@@ -93,8 +93,6 @@ void NaryTreeStorage::displayTopSongs(const std::string& hashInput, bool infoRes
     }
     bool foundMatch = false;
 
-    bool foundMatch = false;
-
     // check if node exists
     if (!node->songCollection.queue.empty()) {
 
@@ -102,6 +100,7 @@ void NaryTreeStorage::displayTopSongs(const std::string& hashInput, bool infoRes
         int count = 0;
         std::vector<std::string> moods = { "Happy", "Sad", "Angry", "Focused" };
         // Output up to 20 top songs
+        std::cout << "\nList of songs matching hash " << hashInput << ":\n" << std::endl;
         while (!node->songCollection.queue.empty() && count < 20) {
             const MusicObject& song = node->songCollection.queue.top();
              if (song.filterHash == hashInput) {
