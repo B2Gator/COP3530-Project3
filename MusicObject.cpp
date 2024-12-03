@@ -89,7 +89,7 @@ int MusicObject::calculateMood() {
 	else { // valence is less than half, either sad or angry     
 		if (energy < 0.5)
 			mood = 1; // sad
-		else;
+		else
 			mood = 2; // angry
 	}
 
